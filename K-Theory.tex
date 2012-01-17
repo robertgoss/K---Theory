@@ -1,0 +1,84 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%Set up environments
+\theoremstyle{plain}% default
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+\newtheorem{conj}{Conjecture}
+\newtheorem{exmp}{Example}[section]
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+
+%Useful macros
+%Blackboard bold
+\newcommand{\RR}{\mathbb{R}} 
+\newcommand{\CC}{\mathbb{C}} 
+\newcommand{\HH}{\mathbb{H}} 
+
+%opening
+\title{K - Theory}
+\author{Based on lectures by Professor John Jones}
+
+\begin{document}
+
+\maketitle
+
+\section{Vector Bundles}
+
+\subsection{Basic Definitions}
+
+K theory is principally concerned with the study of Vector bundles over differential manifolds. So we first cover the basics of vector bundles. 
+
+\begin{defn}
+ A real vector bundle over a topological space $B$ is a topological space $E$ and a map $\pi:E\mapsto B$ such that:
+ \begin{itemize}
+  \item The structure of a real vector space on the fibre $E_b:=\pi^{-1}(b)$
+  \item The vector space must be locally trivial so for each $b\in B$ we have a neighbourhood $U\subset B$ 
+with $b\in U$ and a homeomorphism $h:U\times \mathbb{R}^n\mapsto E_U := \pi^{-1}(U)$ such that the following holds:
+  \begin{itemize}
+   \item The following diagram commutes:
+% Dia 1
+   \item For all $x\in U$ the natural map $v\mapsto h(x,v)$ is a linear isomorphism.
+  \end{itemize}
+ \end{itemize}
+\end{defn}
+
+The space $E$ is traditionally referred to as the total space, $B$ the base space and $\pi$ the projection.
+
+\begin{defn}
+ A map $\phi E\mapsto E'$ is a bundle morphism if it takes fibres linearly to fibres thus if:
+  \begin{itemize}
+   \item The following diagram commutes
+% Dia 2
+   \item For each $b \in B$, $\phi_b:=\phi\rvert_b :E_b \mapsto E'_b$ is a linear map
+  \end{itemize}
+\end{defn}
+
+As one would expect a subbundle of a vector bundle $\pi:E\mapsto B$ is a subspace $E'\subset E$
+such that the map induced by the inclusion $i:E'\mapsto E$ is a bundle morphism. Two 
+vector bundles $E$ and $E'$ are isomorphic if there is a homeomorphism between them which is a bundle map.
+Particularly the linear map $\phi_b:=\phi\rvert_b :E_b \mapsto E'_b$ is an isomorphism of vector spaces.
+
+\begin{defn}
+  $Vect(B)$ is the set of isomorphism classes of vector bundles over $B$ 
+\end{defn}
+
+Later we will show that $Vect(B)$ has a some algebraic structure, it is a semi-ring.
+
+\subsection{Examples}
+
+\subsection{Constructions}
+
+\section{K-Theory}
+
+
+\end{document}
