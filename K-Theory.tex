@@ -112,7 +112,7 @@ contains points with non zero preimage so we cannot have local triviality.
 
 \subsubsection{Tangent bundle}
 
-We seek to generalize the tangent bundle of a sphere to more general manifolds $M$ embedded in $\RR^N$.
+We seek to generalise the tangent bundle of a sphere to more general manifolds $M$ embedded in $\RR^N$.
 We define the tangent bundle of a manifold by:
 $$TM:=\{ (x,v)\in \RR^N\times\RR^N | v\in T_xM \}$$
 
@@ -188,7 +188,19 @@ $f^\ast Vect(Y)\mapsto Vect(X)$ which is functorial giving:
 
 \subsubsection{Direct Sums}
 
-Given 
+Given two vector bundles $\pi,\pi':E,E'\mapsto B$ we want to form the direct sum. By which we mean a bundle 
+$E\oplus E':\mapsto B$ such that the fibre at a point is the direct sum of the fibres in $E$
+and $E'$ respectively thus $(E\oplus E')_x=E_x\oplus E'_x$. We have the following definition:
+$$E\oplus E' = \{(v,w)\in E\time E' | \pi(v)=\pi(w) \}$$
+If $E\conj F$ and $E'\conj F'$ and $0$ is the product bundle $B\times \RR^0$ we have the following:
+$$ E\oplus E'\conj F\oplus F'$$
+$$ E\oplus E'\conj E'\oplus E$$
+$$ E\oplus 0\conj E \conj 0\oplus E$$
+Thus $\oplus$ extends to give a commutative, assosiative map with zero on $Vect(B)$
+$$\oplus :Vect(B)\times Vect(B)\mapstoVect(B)$$
+This gives $Vect(B)$ the structure of an abelian monoid. For example all vector spaces over a point
+are product bundles thus we have:
+$$Vect(point)=({\RR^n|n\in\NN},\oplus)\conj (\NN,\plus)$$
 
 \subsubsection{Tensor Products}
 
