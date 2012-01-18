@@ -14,7 +14,8 @@
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}
 \newtheorem{conj}{Conjecture}
-\newtheorem{exmp}{Example}[section]
+\newtheorem{exmp}{Example}
+\newtheorem{exer}{Exercise}
 \theoremstyle{remark}
 \newtheorem{rem}{Remark}
 
@@ -54,19 +55,26 @@ with $b\in U$ and a homeomorphism $h:U\times \mathbb{R}^n\mapsto E_U := \pi^{-1}
 
 The space $E$ is traditionally referred to as the total space, $B$ the base space and $\pi$ the projection.
 
+\begin{rem}
+ From the local triviality condition we see that the dimension of a fibre is constant on connected components.
+In particular if $B$ is connected a vector bundle over it has a well defined dimension. If this dimension is 1
+we sometimes refer to the vector bundle as a line bundle.
+\end{rem}
+
+
 \begin{defn}
  A map $\phi E\mapsto E'$ is a bundle morphism if it takes fibres linearly to fibres thus if:
   \begin{itemize}
    \item The following diagram commutes
 % Dia 2
-   \item For each $b \in B$, $\phi_b:=\phi\rvert_b :E_b \mapsto E'_b$ is a linear map
+   \item For each $b \in B$, $\phi_b:=\phi|_b :E_b \mapsto E'_b$ is a linear map
   \end{itemize}
 \end{defn}
 
 As one would expect a subbundle of a vector bundle $\pi:E\mapsto B$ is a subspace $E'\subset E$
 such that the map induced by the inclusion $i:E'\mapsto E$ is a bundle morphism. Two 
 vector bundles $E$ and $E'$ are isomorphic if there is a homeomorphism between them which is a bundle map.
-Particularly the linear map $\phi_b:=\phi\rvert_b :E_b \mapsto E'_b$ is an isomorphism of vector spaces.
+Particularly the linear map $\phi_b:=\phi|_b :E_b \mapsto E'_b$ is an isomorphism of vector spaces.
 
 \begin{defn}
   $Vect(B)$ is the set of isomorphism classes of vector bundles over $B$ 
@@ -75,6 +83,92 @@ Particularly the linear map $\phi_b:=\phi\rvert_b :E_b \mapsto E'_b$ is an isomo
 Later we will show that $Vect(B)$ has a some algebraic structure, it is a semi-ring.
 
 \subsection{Examples}
+
+\subsubsection{Product bundles}
+
+Given a topological space $B$ we can see that $B\times \RR^n$ is a vector bundle with projection to
+the first coordinate. $B \times\RR^n$ is also known as the trivial bundle and if $E\cong B\times \RR^n$ 
+then we say that $E$ is trivial.
+
+\subsubsection{Tangent bundle of a sphere}
+
+Take the sphere $S^n$ in $\RR^{n+1}$ then we define:
+$$TS^n:=\{(x,v) \in S^n\times \RR^{n+1} | \langle x,v \rangle =0\} $$
+Where $TS^n$ is topologised with the subspace topology.
+We can see that this is the tangent bundle of $S^n$ and that it is a subbundle of $S^n\times \RR^{n+1}$.
+
+\begin{rem}
+ This bundle is non-trivial if $n\neq 1,3,7$ this is a deep theorem which while not proved first within 
+K-Theory, has it's most elegant proof in the subject.
+\end{rem}
+
+
+\subsubsection{Counterexample}
+
+Consider the following space:
+$$W:=\{ (v,w) \in \RR^{n+1}\times \RR^{n+1} | \langle v,w \rangle \}$$
+This is not a vector bundle as the preimage of $0$ is the zero vector space but any neighbourhood of $0$ 
+contains points with non zero preimage so we cannot have local triviality.
+
+\subsubsection{Tangent bundle}
+
+We seek to generalize the tangent bundle of a sphere to more general manifolds $M$ embedded in $\RR^N$.
+We define the tangent bundle of a manifold by:
+$$TM:=\{ (x,v)\in \RR^N\times\RR^N | v\in T_xM \}$$
+
+\begin{rem}
+ This definition requires a particular embedding of our manifold in $\RR^N$. There is a more general definition
+defined using coordinate charts but it can readily be seen that these definitions give isomorphic bundles. Further 
+every manifold of dimension $N$ may be embedded in $\RR^2N$ by the Whitney embedding theorem. 
+\end{rem}
+
+
+\subsubsection{Real projective space}
+
+We there is an action of $\RR^\ast$ on $\RR^{n+1}$ coming from multiplication. This action restricts to $\pm 1$ on 
+the sphere $S^n$ in $\RR^{n+1}$ we define the real projective space as:
+$$\RR P^n = \frac{S^n}{\{\pm 1\}} = \frac{\RR^{n+1}\setminus\{0\}}{\RR^\ast}$$
+Then $\RR P^n$ can be thought of as the set of lines through the origin given a natural topology. This does mean 
+that there is a canonical line bundle where the fibre of a point in $\RR P^n$ is the line in $\RR^{n+1}$ that this 
+point represents.
+$$K_\RR := \{ ([x],v\in \RR P^n\times \RR^{n+1} | v=tx t\in \RR\}$$
+
+We note that this is non-trivial though we do not have the required machinery to show this yet.
+
+\begin{exer}
+ Show that $K_\RR$ is a real 1 dimensional vector space over $\RR P^n$.
+\end{exer}
+
+
+\subsubsection{Other projective spaces}
+
+The entire theory of real vector bundles may be developed over $\CC$ or $\HH$ in exactly the same fashion. This can
+be used to define $\CC P^n$ and $\HH P^n$ and canonical complex and quaternionic line bundles over them.
+
+\subsubsection{Grassmannians}
+
+We now want to define the Grassmannian $G_k(\RR^n)$ which will be the set of $k$-dimensional subspaces of $\RR^n$.
+This has a canonical $k$-dimensional vector bundle in which the fibre of a point in $G_k(\RR^n)$ is the subspace 
+in $\RR^n$ that the point represents. 
+To show these actually exist we need to topologise both $G_k(\RR^n)$ and total space of the canonical bundle.
+Let $V_k(\RR^n)$ be the space of linear embeddings $\RR^k\mapsto \RR^n$ this has a natural topology as a subspace of
+$\RR^{n m}$. Two embeddings $a,b$ in $V_k(\RR^n)$ define the same subspace of $\RR^n$ if there is a $g\in GL_k(\RR)$
+with $a=g\cdot b$ thus we define:
+$$G_k(\RR^n):=\frac{V_k(\RR^n)}{GL_k(\RR)}$$
+And we define the canonical bundle as:
+$$U_k(\RR^n):=\{(p,v)\in G_k(\RR^n)\times \RR^n | v\in P\}$$
+Then $U_k(\RR^n)$ is a $k$-dimensional vector bundle over $G_k(\RR^n)$ and is non-trivial.
+
+\begin{exer}
+Show the following:
+ \begin{enumerate}
+  \item $G_1(\RR^n)=\RR P^n-1$.
+  \item $G_k(\RR^n) = G_{n-k}(\RR^n)$.
+  \item $G_k(\RR^n)$ is compact.
+  \item Both $V_k(\RR^n)$ and $G_k(\RR^n)$ are smooth.
+ \end{enumerate}
+What are the dimensions of $G_k(\RR^n)$ and $G_k(\RR^n)$?
+\end{exer}
 
 \subsection{Constructions}
 
