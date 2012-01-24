@@ -44,14 +44,14 @@
 
 \subsection{Basic Definitions}
 
-K theory is principally concerned with the study of Vector bundles over differential manifolds. So we first cover the basics of vector bundles. 
+K-Theory is principally concerned with the study of vector bundles over topological spaces. So first we cover the basics of vector bundles. 
 
 \begin{defn}
  A real vector bundle over a topological space $B$ is a topological space $E$ and a map $\pi:E\mapsto B$ such that:
  \begin{itemize}
-  \item The structure of a real vector space on the fibre $E_b:=\pi^{-1}(b)$
-  \item The vector space must be locally trivial so for each $b\in B$ we have a neighbourhood $U\subset B$ 
-with $b\in U$ and a homeomorphism $h:U\times \mathbb{R}^n\mapsto E_U := \pi^{-1}(U)$ such that the following holds:
+  \item We have the structure of a real vector space on the fibre $E_b:=\pi^{-1}(b)$
+  \item The vector bundle locally trivial thus for each $b\in B$ we have a neighbourhood $U\subset B$ 
+with $b\in U$ and a homeomorphism $h:U\times \mathbb{R}^n\mapsto E_U := \pi^{-1}(U)$ such that:
   \begin{itemize}
    \item The following diagram commutes:
 $$\bfig
@@ -63,11 +63,11 @@ $$\bfig
 \end{defn}
 
 
-The space $E$ is traditionally referred to as the total space, $B$ the base space and $\pi$ the projection.
+The space $E$ is traditionally referred to as the total space, $B$ is refered to as the base space and $\pi$ the projection.
 
 \begin{rem}
  From the local triviality condition we see that the dimension of a fibre is constant on connected components.
-In particular if $B$ is connected a vector bundle over it has a well defined dimension. If this dimension is 1
+In particular if $B$ is connected a vector bundle over $B$ has a well defined dimension. If this dimension is 1
 we sometimes refer to the vector bundle as a line bundle.
 \end{rem}
 
@@ -86,13 +86,13 @@ $$\bfig
 As one would expect a subbundle of a vector bundle $\pi:E\mapsto B$ is a subspace $E'\subset E$
 such that the map induced by the inclusion $i:E'\mapsto E$ is a bundle morphism. Two 
 vector bundles $E$ and $E'$ are isomorphic if there is a homeomorphism between them which is a bundle map.
-Particularly the linear map $\phi_b:=\phi|_b :E_b \mapsto E'_b$ is an isomorphism of vector spaces.
+In particular the linear map $\phi_b:=\phi|_b :E_b \mapsto E'_b$ is an isomorphism of vector spaces.
 
 \begin{defn}
   $Vect(B)$ is the set of isomorphism classes of vector bundles over $B$ 
 \end{defn}
 
-Later we will show that $Vect(B)$ has a some algebraic structure, it is a semi-ring.
+Later we will show that $Vect(B)$ has some algebraic structure, it is a semi-ring.
 
 \subsection{Examples}
 
@@ -100,7 +100,7 @@ Later we will show that $Vect(B)$ has a some algebraic structure, it is a semi-r
 
 Given a topological space $B$ we can see that $B\times \RR^n$ is a vector bundle with projection to
 the first coordinate. $B \times\RR^n$ is also known as the trivial bundle and if $E\cong B\times \RR^n$ 
-then we say that $E$ is trivial.
+we say that $E$ is trivial.
 
 \subsubsection{Tangent bundle of a sphere}
 
@@ -111,7 +111,7 @@ We can see that this is the tangent bundle of $S^n$ and that it is a subbundle o
 
 \begin{rem}
  This bundle is non-trivial if $n\neq 1,3,7$ this is a deep theorem which while not proved first within 
-K-Theory, has it's most elegant proof in the subject.
+K-Theory, has it's most elegant proof in this subject.
 \end{rem}
 
 
@@ -120,7 +120,7 @@ K-Theory, has it's most elegant proof in the subject.
 Consider the following space:
 $$W:=\{ (v,w) \in \RR^{n+1}\times \RR^{n+1} | \langle v,w \rangle \}$$
 This is not a vector bundle as the preimage of $0$ is the zero vector space but any neighbourhood of $0$ 
-contains points with non zero preimage so we cannot have local triviality.
+contains points with non zero preimage contradiciting local triviality.
 
 \subsubsection{Tangent bundle}
 
@@ -131,21 +131,21 @@ $$TM:=\{ (x,v)\in \RR^N\times\RR^N | v\in T_xM \}$$
 \begin{rem}
  This definition requires a particular embedding of our manifold in $\RR^N$. There is a more general definition
 defined using coordinate charts but it can readily be seen that these definitions give isomorphic bundles. Further 
-every manifold of dimension $N$ may be embedded in $\RR^2N$ by the Whitney embedding theorem. 
+every manifold of dimension $N$ may be embedded in $\RR^{2N}$ by the Whitney embedding theorem. 
 \end{rem}
 
 
 \subsubsection{Real projective space}
 
-We there is an action of $\RR^\ast$ on $\RR^{n+1}$ coming from multiplication. This action restricts to $\pm 1$ on 
+There is an action of $\RR^\ast$ on $\RR^{n+1}$ coming from multiplication. This action restricts to $\pm 1$ on 
 the sphere $S^n$ in $\RR^{n+1}$ we define the real projective space as:
 $$\RR P^n = \frac{S^n}{\{\pm 1\}} = \frac{\RR^{n+1}\setminus\{0\}}{\RR^\ast}$$
-Then $\RR P^n$ can be thought of as the set of lines through the origin given a natural topology. This does mean 
+$\RR P^n$ can then be thought of as the set of lines through the origin given a natural topology. This means 
 that there is a canonical line bundle where the fibre of a point in $\RR P^n$ is the line in $\RR^{n+1}$ that this 
 point represents.
 $$K_\RR := \{ ([x],v\in \RR P^n\times \RR^{n+1} | v=tx t\in \RR\}$$
 
-We note that this is non-trivial though we do not have the required machinery to show this yet.
+We note that this is non-trivial although we do not have the required machinery to show this yet.
 
 \begin{exer}
  Show that $K_\RR$ is a real 1 dimensional vector space over $\RR P^n$.
@@ -191,7 +191,7 @@ $f^\ast E$ over $X$ as follows:
 $$f^\ast E := \{ (x,v) \in X\times E | f(x)=\pi(v)\}$$
 Then we have that $(f^\ast E)_x=x\times E_f(x)$ and the dimension of $f^\ast E$ is the same as
 the dimension of $E$. Further $f^\ast E$ is a vector bundle and $f:X\mapsto Y$ induces a map
-$f^\ast Vect(Y)\mapsto Vect(X)$ which is functorial giving:
+$f^\ast Vect(Y)\mapsto Vect(X)$ which is functorial thus giving:
 \begin{itemize}
  \item $1^\ast = 1$
  \item $(g\circ f)^\ast = f^\ast \circ g^\ast$
@@ -204,13 +204,13 @@ Given two vector bundles $\pi,\pi':E,E'\mapsto B$ we want to form the direct sum
 $E\oplus E':\mapsto B$ such that the fibre at a point is the direct sum of the fibres in $E$
 and $E'$ respectively thus $(E\oplus E')_x=E_x\oplus E'_x$. We have the following definition:
 $$E\oplus E' = \{(v,w)\in E\times E' | \pi(v)=\pi(w) \}$$
-If $E\cong F$ and $E'\cong F'$ and $0$ is the product bundle $B\times \RR^0$ we have the following:
+If $E\cong F$ and $E'\cong F'$ and $0$ is the product bundle $B\times \RR^0$ then we have the following:
 $$ E\oplus E'\cong F\oplus F'$$
 $$ E\oplus E'\cong E'\oplus E$$
 $$ E\oplus 0\cong E \cong 0\oplus E$$
 Thus $\oplus$ extends to give a commutative, associative map with zero on $Vect(B)$
 $$\oplus :Vect(B)\times Vect(B)\mapsto Vect(B)$$
-This gives $Vect(B)$ the structure of an Abelian monoid. For example all vector spaces over a point
+This gives $Vect(B)$ the structure of an abelian monoid. For example all vector spaces over a point
 are product bundles thus we have:
 $$Vect(point)=({\RR^n|n\in\NN},\oplus)\cong (\NN,+)$$
 
@@ -240,11 +240,13 @@ for all suitable $U$.
 
 \subsubsection{Other constructions}
 
-We remark that the above construction for tensor products may be carried over for any map $\mathcal{F}:\RR^{n_1}\times\ldots\times\RR^{n_k}\mapsto\RR^k$
+We remark that the above construction for tensor products may be carried over for any map $\mathcal{F}:\RR^{n_1}\times\ldots\times\RR^{n_k}\mapsto\RR^m$
 for which we have the same continuity condition we used in the proof of the tensor product case.
+That the induced map $\mathcal{F}(Gl_{n_1}(\RR)\times\ldots\times Gl_{n_k}(\RR)\mapsto Gl_m(\RR)$ is continuous.
 
 
-We then define a bundle $\mathcal{F}(E_1,E_2,\ldots,E_k)$ such that $\mathcal{F}(E_1,E_2,\ldots,E_k)_x = \mathcal{F}((E_1)_x,(E_2)_x,\ldots,(E_k)_x)$
+We can then define a bundle $\mathcal{F}(E_1,E_2,\ldots,E_k)$ such that:
+$$\mathcal{F}(E_1,\ldots,E_k)_x = \mathcal{F}((E_1)_x,\ldots,(E_k)_x)$$
 
 Some notable examples include
 \begin{itemize}
@@ -258,8 +260,8 @@ Some notable examples include
 
 Like the direct sum it can be shown that the tensor product operation descends to a map 
 $\otimes:Vect(X)\times Vect(X)\mapsto Vect(X)$. This operation is commutative, associative, has a unit element
-($X\times\RR$) and is distributive over $\oplus$. Thus $Vect(X)$ defines a semi ring and it may also be shown that
-pullbacks give semi-ring homeomorphisms. As an example $Vect(point)\cong\NN$ the free semi-ring generated by 1 element.
+($\mathbb{1}:=X\times\RR$) and is distributive over $\oplus$. Thus $Vect(X)$ defines a semi ring. It may also be shown that
+pullbacks give semi-ring homeomorphisms thus $Vect$ gives a functor from topological spaces to semi rings. As an example $Vect(point)\cong\NN$ the free semi-ring generated by 1 element.
 
 
 \section{K-Theory}
@@ -267,17 +269,16 @@ pullbacks give semi-ring homeomorphisms. As an example $Vect(point)\cong\NN$ the
 \subsection{K-Groups}
 
 We would like to extend $Vect(X)$ so that it has the structure of an ring. We will first extend $Vect(X)$ to being a
-group by adding formal inverses these new bundles are known as virtual bundles. We will then extend our multiplicative
-operation $\otimes$ over these virtual bundles to define a ring. In particular after extension $Vect(point)$ will be 
+group by adding formal inverses. These new bundles that we add are known as virtual bundles. We will then extend our multiplicative operation $\otimes$ over these virtual bundles to define a ring. In particular after extension $Vect(point)$ will be 
 isomorphic to $\ZZ$.
 
 \begin{defn}
- Given an Albelian monoid $A$ then $K(A)$ is the universal Abelian group of $A$ if:
+ Given an abelian monoid $A$ then $K(A)$ is the universal abelian group of $A$ if:
  \begin{enumerate}
-  \item $K(A)$ is an Albelian group.
+  \item $K(A)$ is an abelian group.
   \item There exists a morphism of monoids $A\mapsto K(A)$
-  \item Given any Albelian group $C$ and homomorphism of monoids $\phi:A\mapsto C$ then there exists a unique
-group homomorphism $psi:K(A)\mapsto C$ such that the following diagram commutes:
+  \item Given any abelian group $C$ and homomorphism of monoids $\phi:A\mapsto C$ then there exists a unique
+group homomorphism $\psi:K(A)\mapsto C$ such that the following diagram commutes:
 $$\bfig
 \qtriangle[A`K(A)`C;`\phi`\psi]
  \efig$$
@@ -285,35 +286,37 @@ $$\bfig
 \end{defn}
 
 \begin{rem}
- $K(A)$ is referred to as the $K-group$\footnote{This derives from the German for classes} or Grothendick group of $A$.
+ $K(A)$ is referred to as the $K-group$ or Grothendick group of $A$.
 \end{rem}
 
 
-We prove existence by giving two constructions of $K(A)$ the first being of more theoretical use while the second 
-being of more practical computational use. Throughout this section we will let $(A,\oplus,\otimes)$ be a semi ring with Albelian monoid $(A,\oplus)$ and K-group $(K(A),+)$
+We prove existence by giving two constructions of $K(A)$ the first being of more theoretical use, while the second 
+is of more practical computational use. Throughout this section we will let $(A,\oplus,\otimes)$ be a semi ring with abelian monoid $(A,\oplus)$ and $K$-group $(K(A),+)$
 
 \subsubsection{Existence}
 
 \begin{enumerate}
- \item Let $(F(A),+)$ be the free Abelian group generated by $A$ and define $E(A)$ to be the subgroup of $F(A)$
+ \item Let $(F(A),+)$ be the free abelian group generated by $A$ and define $E(A)$ to be the subgroup of $F(A)$
 generated be elements of the form:
 $$a+b-(a\oplus b)$$
 We then set $K(A):=F(a)/E(A)$.
  \item We define the following relation $\sim$ on $A\times A$
-$$(a,b)\sim (c,d) \iff \exists e\in A with a\oplus b\oplus e =c\oplus d\oplus e$$
-we then set $K(A)=A\times A/\sim$. We denote the equivalence class of $(a,b)\in K(A)$  by $[a,b]$.
+$$(a,b)\sim (c,d) \iff \exists e\in A \mathtt{ with } a\oplus b\oplus e =c\oplus d\oplus e$$
+we then set $K(A)=A\times A/\sim$. We denote the equivalence class
+\footnote{The notation $K$ derives from the German for class which begins with a K.}
+ of $(a,b)\in K(A)$  by $[a,b]$.
 Then we define addition in $K(A)$ by:
 $$[a,b]+[c,d]=[a\oplus c,b\oplus d]$$
-We note that this addition and a zero element $0=[0,0]$ and inverses as $[a,b]+[b,a]=0$ thus $[b,a]=-[a,b]$.
-We can think of these elements  as formal differences of elements of $A$ in the following way.
-The map $[]:A\mapsto K(A)$ $[a]=[a,0]$ gives a homomorphism of monoids and 
+We note that this addition has a zero element $0=[0,0]$ as well as inverses as $[a,b]+[b,a]=0$ and so $[b,a]=-[a,b]$.
+We can think of elements in $K(A)$  as formal differences of elements of $A$ in the following way,
+the map $[ ]:A\mapsto K(A)$ with $[a]=[a,0]$ gives a homomorphism of monoids such that
 $$[a,b]=[a,0]+[0,b]=[a,0]-[b,0]=[a]-[b]$$
 \end{enumerate}
 
 \subsubsection{Multiplicative Structure}
 
 We now want to define a multiplicative structure $\times$ on $K(A)$ compatible with $\otimes$ which makes $K(A)$
-a ring. Now we wish to have $[x]\times[y]=[x\otimes y]$ and a ring structure on $K(A)$ thus we must have:
+a ring. As we wish to have $[x]\times[y]=[x\otimes y]$ and a ring structure on $K(A)$ we must have:
 \begin{align*}
  [a,b]\times[c,d] &= ([a]-[b])\times([c]-[d])\\
 		  &= ([a]\times[c]+[b]\times[d])-([a]\times[d]+[b]\times[c])\\
@@ -325,8 +328,8 @@ a ring. Now we wish to have $[x]\times[y]=[x\otimes y]$ and a ring structure on 
 We leave it to reader to show that this structure does give us a ring structure.
 
 \begin{defn}
- Suppose that $X$ is a topological space then we define $K(X):=K(Vect(X))$ and we have that the map $X\mapsto K(X)$
-is a functor from the category of topological spaces to the category of rings. With $K(point)=\ZZ$.
+ Suppose that $X$ is a topological space then we define $K(X)$ to be $K(Vect(X))$ and we have that the map $X\mapsto K(X)$
+is a functor from the category of topological spaces to the category of rings with $K(point)=\ZZ$. We refer to this at the $K$-Theory of a space $X$.
 \end{defn}
 
 The object of this course is the study of $K(X)$.
