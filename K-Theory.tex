@@ -5,6 +5,9 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 
+\usepackage[all,cmtip]{xy}
+\usepackage{diagxy}
+
 %Set up environments
 \theoremstyle{plain}% default
 \newtheorem{thm}{Theorem}
@@ -22,12 +25,12 @@
 %Useful macros
 %Blackboard bold
 \newcommand{\NN}{\mathbb{N}} 
+\newcommand{\ZZ}{\mathbb{Z}} 
 \newcommand{\RR}{\mathbb{R}} 
 \newcommand{\CC}{\mathbb{C}} 
 \newcommand{\HH}{\mathbb{H}} 
 
 %Arrows
-\newcommand{\iff}{\Leftrightarrow}
 
 %opening
 \title{K - Theory}
@@ -51,11 +54,14 @@ K theory is principally concerned with the study of Vector bundles over differen
 with $b\in U$ and a homeomorphism $h:U\times \mathbb{R}^n\mapsto E_U := \pi^{-1}(U)$ such that the following holds:
   \begin{itemize}
    \item The following diagram commutes:
-% Dia 1
+$$\bfig
+\Vtriangle[E`U\times \RR^n`B;h`\pi`\pi_U]
+ \efig$$
    \item For all $x\in U$ the natural map $v\mapsto h(x,v)$ is a linear isomorphism.
   \end{itemize}
  \end{itemize}
 \end{defn}
+
 
 The space $E$ is traditionally referred to as the total space, $B$ the base space and $\pi$ the projection.
 
@@ -67,10 +73,12 @@ we sometimes refer to the vector bundle as a line bundle.
 
 
 \begin{defn}
- A map $\phi E\mapsto E'$ is a bundle morphism if it takes fibres linearly to fibres thus if:
+ A map $\phi:E\mapsto E'$ is a bundle morphism if it takes fibres linearly to fibres thus if:
   \begin{itemize}
    \item The following diagram commutes
-% Dia 2
+$$\bfig
+\Vtriangle[E`E'`B;\phi`\pi`\pi'_U]
+ \efig$$
    \item For each $b \in B$, $\phi_b:=\phi|_b :E_b \mapsto E'_b$ is a linear map
   \end{itemize}
 \end{defn}
@@ -195,16 +203,16 @@ $f^\ast Vect(Y)\mapsto Vect(X)$ which is functorial giving:
 Given two vector bundles $\pi,\pi':E,E'\mapsto B$ we want to form the direct sum. By which we mean a bundle 
 $E\oplus E':\mapsto B$ such that the fibre at a point is the direct sum of the fibres in $E$
 and $E'$ respectively thus $(E\oplus E')_x=E_x\oplus E'_x$. We have the following definition:
-$$E\oplus E' = \{(v,w)\in E\time E' | \pi(v)=\pi(w) \}$$
-If $E\conj F$ and $E'\conj F'$ and $0$ is the product bundle $B\times \RR^0$ we have the following:
-$$ E\oplus E'\conj F\oplus F'$$
-$$ E\oplus E'\conj E'\oplus E$$
-$$ E\oplus 0\conj E \conj 0\oplus E$$
+$$E\oplus E' = \{(v,w)\in E\times E' | \pi(v)=\pi(w) \}$$
+If $E\cong F$ and $E'\cong F'$ and $0$ is the product bundle $B\times \RR^0$ we have the following:
+$$ E\oplus E'\cong F\oplus F'$$
+$$ E\oplus E'\cong E'\oplus E$$
+$$ E\oplus 0\cong E \cong 0\oplus E$$
 Thus $\oplus$ extends to give a commutative, associative map with zero on $Vect(B)$
-$$\oplus :Vect(B)\times Vect(B)\mapstoVect(B)$$
+$$\oplus :Vect(B)\times Vect(B)\mapsto Vect(B)$$
 This gives $Vect(B)$ the structure of an Abelian monoid. For example all vector spaces over a point
 are product bundles thus we have:
-$$Vect(point)=({\RR^n|n\in\NN},\oplus)\conj (\NN,\plus)$$
+$$Vect(point)=({\RR^n|n\in\NN},\oplus)\cong (\NN,+)$$
 
 \subsubsection{Tensor Products}
 
@@ -255,7 +263,7 @@ pullbacks give semi-ring homeomorphisms. As an example $Vect(point)\cong\NN$ the
 
 \section{K-Theory}
 
-\subsusction{K-Groups}
+\subsection{K-Groups}
 
 We would like to extend $Vect(X)$ so that it has the structure of an ring. We will first extend $Vect(X)$ to being a
 group by adding formal inverses these new bundles are known as virtual bundles. We will then extend our multiplicative
@@ -269,7 +277,9 @@ isomorphic to $\ZZ$.
   \item There exists a morphism of monoids $A\mapsto K(A)$
   \item Given any Albelian group $C$ and homomorphism of monoids $\phi:A\mapsto C$ then there exists a unique
 group homomorphism $psi:K(A)\mapsto C$ such that the following diagram commutes:
-%TODO dia 
+$$\bfig
+\qtriangle[A`K(A)`C;`\phi`\psi]
+ \efig$$
  \end{enumerate}
 \end{defn}
 
@@ -303,13 +313,13 @@ $$[a,b]=[a,0]+[0,b]=[a,0]-[b,0]=[a]-[b]$$
 
 We now want to define a multiplicative structure $\times$ on $K(A)$ compatible with $\otimes$ which makes $K(A)$
 a ring. Now we wish to have $[x]\times[y]=[x\otimes y]$ and a ring structure on $K(A)$ thus we must have:
-\begin{align}
- [a,b]\times[c,d] &= ([a]-[b])\times([c]-[d])
-		  &= ([a][c]+[b][d])-([a][d]+[b][c])
-		  &= ([a\otimes c]+[b\otimes d])-([a\otimes d]+[b\otimes c])
-		  &= [(a\otimes c)\oplus(b\otimes d)]-[(a\otimes d)\oplus(b\otimes c)]
+\begin{align*}
+ [a,b]\times[c,d] &= ([a]-[b])\times([c]-[d])\\
+		  &= ([a]\times[c]+[b]\times[d])-([a]\times[d]+[b]\times[c])\\
+		  &= ([a\otimes c]+[b\otimes d])-([a\otimes d]+[b\otimes c])\\
+		  &= [(a\otimes c)\oplus(b\otimes d)]-[(a\otimes d)\oplus(b\otimes c)]\\
 		  &= [(a\otimes c)\oplus(b\otimes d),(a\otimes d)\oplus(b\otimes c)]
-\end{align}
+\end{align*}
 
 We leave it to reader to show that this structure does give us a ring structure.
 
