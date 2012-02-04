@@ -334,5 +334,207 @@ is a functor from the category of topological spaces to the category of rings wi
 
 The object of this course is the study of $K(X)$.
 
+\section{Some Calculations}
 
+Let $X$ be a compact, Hausdorff topological space. We will make use of the following well known results.
+
+\begin{lem}\label{htpyiso}
+Suppose $f,g:X\to Y$ are homotopic maps and $E$ is a vector bundle over $Y$. Then $f^*(E)\cong g^* (E).$
+\end{lem}
+
+\begin{lem}
+For any vector bundle $E$ over $X$ there exists a vector bundle $F$ over $X$ such that $E\oplus F\cong X \times \RR^n.$ 
+\end{lem}
+
+\begin{cor}
+If $X$ is contractible, then $K(X)\cong \ZZ.$
+\end{cor}
+
+Making use of these lemmas we will calculate $K(S^1).$ Note that any vector bundle over $S^1$ can be written as
+\[
+I \times \RR^n\big/ (0,v) \sim (1,Av)
+\]
+where $A:0\times \RR^n \to 1\times \RR^n$ is a linear isomorphism sometimes called monodromy.
+
+Let $A$ and $B$ be two monodromies belonging to the same path component of $GL_n(\RR)$ and let $E$ and $F$ be the corresponding vector bundles.  It is easy to see that $E\cong F$. Indeed, using a path joining $A$ and $B$ we can construct a vector bundle over $S^1\times I$ whose restriction to $S^1\times 0$ is $E$ and to $S^1\times 1$ is $F$, then by lemma \ref{htpyiso}, $E\cong F$.
+
+Denote by $\epsilon^n\in Vect_n(S^1)$ the trivial bundle $S^1\times R^n$ and by $\eta^n$ the other vector bundle of $Vect_n(S^1)$, corresponding to the monodromy with negative determinant. Since the monodromy corresponding to $\epsilon^n\oplus\epsilon^m$ has positive determinant, we can conclude that $\epsilon^n\oplus\epsilon^m\cong \epsilon^{n+m}.$ Similarly, $\eta^n\oplus\epsilon^m\cong \eta^{n+m}$ and $\eta^n\oplus\eta^m\cong \epsilon^{n+m}.$
+
+Therefore, the monoid $Vect(S^1)$ is $\NN\times\ZZ/2$ and $K(S^1)=\ZZ\oplus \ZZ / 2.$
+
+\begin{exer}
+Find the ring structure of $K(S^1).$
+\end{exer}
+
+\begin{rem}
+Since $GL_n(\CC)$ is connected $Vect_n^{\CC}(S^1) = {\epsilon^n}$. Then, $K^\CC (S^1) = \ZZ.$
+\end{rem}
+
+\subsection{Constructions on Cones, Suspensions and Loops.}
+
+Let $X$ be a topological space. We will briefly review some basic definitions.
+
+\begin{itemize}
+\item The cone of $X$ is $CX=\frac{X\times[0,1]}{X\times 1}.$
+
+\item The suspension of $X$ is $SX = \frac{X \times [-1,1]}{X\times -1\cup X\times +1}.$
+
+\item The base loop space of $X$ is $\Omega (X) =  Map(([0,1],\{0,1\}),(X,x_0)).$
+
+\item $[X,Y]$ denotes the homotopy classes of maps $X\to Y.$
+\end{itemize}
+
+\begin{rem}We can see that $SX = C_+X\cup C_- X$ and $X = C_+X\cap C_- X$. Further by constructing for each $f: SX\to Y$ a map $\hat{f}:X\to \Omega Y$ defined by $\hat{f}(x)(t)= f(t,x)$ we conclude that $[SX,Y]\cong [X,\Omega Y]$.
+\end{rem}
+
+\subsubsection{The Clutching Construction.}
+
+Suppose $X = X_1 \cup X_2$ and $A= X_1 \cap X_2$. Suppose further that we have two vector bundles $E_1\to X_1$ and $E_2\to X_2$ and an isomorphism $\phi: E_1|_A \to E_2|_A.$
+Then space 
+\[
+E_1\cup_\phi E_2 = \frac{E_1\sqcup E_2}{\sim}
+\] 
+is a vector bundle, where $u\sim v$ iff $\pi_1(u) = \pi_2(v)\in A$ and $\phi(u)=v$.
+
+\begin{thm}
+If $X$ is a connected topological space, then $Vect_n(SX) = [X, GL_n(\RR)].$
+\end{thm}
+
+\begin{proof} Apply the clutching construction to $SX = C_+X\cup C_- X$. Note that $C_+ X$, $C_-X$ are contractible. Choose trivializations of their trivial bundle $E_+ = E |_{C_+X}\cong C_+X\times \RR^n$ and $E_- = E |_{C_-X}\cong C_-X\times \RR^n.$ Comparing these trivializations over $X = C_+X\cap C_- X$ gives a map $X\to GL_n(\RR).$
+
+Conversely given a map $f:X\to GL_n(\RR)$ use the clutching construction on $C_+X\times \RR^n$, $C_-X\times \RR^n$ and $\phi:X\times \RR^n\to X\times\RR^n$ defined by $f$. These constructions define inverse isomorphisms.\end{proof}
+
+\begin{cor}
+$Vect_n(S^ k) =  \pi_{k-1}(GL_n(\RR))$
+\end{cor}
+
+Returning to the example of the Grassmannians, we have an inclusion
+\[ 
+i_n:G_k(\RR^n)\to G_k(\RR^{n+1})
+\]
+and $i_n^*(U_k(\RR^{n+1}))= U_k(\RR^n).$ Let $G_k(\RR^\infty) = \cup_{n=1}^\infty G_k(\RR^n)$ with the direct limit topology, i.e. $V$ is open in $G_k(\RR^\infty)$ if it is open in each element of the union. We can also construct a canonical vector bundle $U_k(\RR^\infty)\to G_k(\RR^\infty)$, the universal bundle.
+
+\begin{thm}
+The map
+\[
+[X,G_k(\RR^\infty)]\to Vect_k(X)
+\] defined by $f\mapsto f^*(U_k(\RR^\infty))$ is a bijection.
+\end{thm}
+
+\begin{rem}
+Using the previous result for suspensions and the last theorem we have
+\[
+[SX, G_k(\RR^\infty)] = [X, GL_k(\RR)]
+\]
+and
+\[
+[X, \Omega G_k(\RR^\infty)] = [X, GL_k(\RR)].
+\]
+Indeed there is a homotopy equivalence
+\[
+\Omega G_k(\RR^\infty) \cong GL_k(\RR).
+\]
+\end{rem}
+
+\begin{proof}
+We will construct an inverse. Let $E\to X$ be a $k$-dimensional vector bundle and choose $F \to X$ such that $E\oplus F \cong X\times \RR^n.$
+Define $\Phi_E: X\to G_k(\RR^ n)$ by $x\mapsto E_x\subset \RR^n.$
+
+It is left to the reader to check the continuity of $\Phi_E$ and the identity $\Phi_E^*(U_k(\RR^\infty))= E.$ We must prove that the homotopy class of $\Phi_E$ is independent of the choice of $F$ and ofthe isomorphism $E\oplus F \cong X\times \RR^n.$
+
+Suppose $i:E\to X\times\RR^n$ and $j:E\to X\times\RR^m$ are two embeddings in a trivial bundle of $x$. Construct the map
+$H:[0,1]\times E\to X\times(\RR^n\oplus\RR^m)$ which takes $(t,e)\mapsto (\pi(e),((1-t)i(e),tj(e))).$ Notice that $H$ is an injection because $i$ and $j$ are injections in each fibre. Then $H$ is an embedding in a trivial bundle of $X$.
+
+$H$ induces a map $\overline{H}: I\times X \to G_k(\RR^n\oplus\RR^m)$ such that
+the restriction map $\overline{H}|_{{0}\times X}$ is the composition $X \to^{\Phi_{E,i}} G_k(\RR^n) \to^{u_n}  G_k(\RR^n\oplus\RR^m)$ and the restriction map $\overline{H}|_{{1}\times X}$ is the composition $X \to^{\Phi_{E,j}} G_k(\RR^n) \to^{v_m}  G_k(\RR^n\oplus\RR^m)$ with $u_n$ and $v_m$ the inclusions to the the first and second factor, respectively. Then, $u_n\circ \Phi_{E,i} \cong \Phi_{E,j} \circ v_m.$ Observe that if $m,n$ are even then the map $G_k(\RR^n\oplus\RR^m) \to G_k(\RR^n\oplus\RR^m)$ given by permuting the factors is homotopic to the identity. Is left to the reader the case when $m,n$ are odd or have different parity.
+
+This gives a homotopy $\Phi_{E,i}$ to $\Phi_{F,j}.$
+\end{proof}
+
+\subsubsection{Important spaces}
+
+The orthogonal group $O_k = \{ A\in GL_k(\RR^n) | AA^t = A^tA = I\}$ is homotopy equivalent to $GL_k(\RR^n).$ Therefore $[X,O_k]=[X,GL_k(\RR^n)] = Vect_k^\RR(SX).$ Similarly, we have the unitary group $U_k = \{ A\in GL_k(\CC^n) | A\overline{A}^t = A^t\overline{A} = I\}$ and $[X,U_k]= Vect_k^\CC(SX)$
+
+Let $BO_k = G_k(\RR^\infty)$ and $BU_k = G_k(\CC^\infty)$. Then by the previous theorem we have $[X,BO_k]= Vect_k^\RR(X)$ and $[X,BU_k]= Vect_k^\CC(X)$.  Also $\Omega BO_k \cong O_k$ and $\Omega BU_k \cong U_k.$  Since there is an embedding $G_k(\RR^\infty)\to G_{k+1}(\RR^\infty)$ defined by identifying $\RR\oplus\RR^\infty\to \RR^\infty.$ Then define $BO = \cup_{k=1}^\infty G_k(\RR^\infty)$ and $BU = \cup_{k=1}^\infty G_k(\CC^\infty)$.
+
+Given $X$ form $\tilde{K}(X) = Ker\{dim:K(X)\to K(point) = \ZZ\}.$
+
+\begin{thm}
+There are isomorphisms
+\[
+\tilde{K}^\RR(X) = [X, BO]
+\]
+\[
+\tilde{K}^\CC(X) = [X, BU]
+\]
+\end{thm}
+
+The proof is going to be discussed later.
+
+\subsection{Bott Periodicity Theorem}
+
+There is an inclusion $O_k\to O_{k+1}$ given by the map
+\[A\mapsto \left( 
+\begin{array}{cc}
+A & 0 \\
+0 & 1 
+\end{array} \right).\] 
+Now form $O = \cup_k O_k\subset M_{\infty,\infty}(\RR),$ the infinite matrices. Observe 
+\[O=\bigg\{\left( 
+\begin{array}{cc}
+A & 0 \\
+0 & I_\infty 
+\end{array} \right) \bigg| A \text{ finite square matrix}, AA^t = A^tA = I\bigg\}.\] 
+
+We will denote by $K$ to the complex $K-$theory, $K^\CC$ and by $KO$ to the real $K-$theory, $K^\RR.$
+\begin{rem}
+$\tilde{KO}(S^n) = \pi_n (BO)= \pi_{n-1} (O)$ and
+$\tilde{K}(S^n) = \pi_n (BU)= \pi_{n-1} (U).$
+\end{rem}
+
+\begin{thm}[Bott Periodicity]
+\begin{itemize}
+\item $\pi_n(U) \cong \pi_{n+2}(U)$
+\item $\pi_n(O) \cong \pi_{n+8}(O)$
+\item \[ \pi_n(U) = \begin{cases} 0 & n\text{ even}\\
+\ZZ & n\text{ odd}
+\end{cases}
+\]
+\item \[ \pi_n(O) = 
+\begin{cases} 
+\ZZ / 2 & n\equiv 0\text{mod}8\\
+\ZZ / 2 & n\equiv 1\text{mod}8\\
+0       & n\equiv 2\text{mod}8\\
+\ZZ     & n\equiv 3\text{mod}8\\
+0       & n\equiv 4\text{mod}8\\
+0       & n\equiv 5\text{mod}8\\
+0       & n\equiv 6\text{mod}8\\
+\ZZ     & n\equiv 7\text{mod}8.
+\end{cases}
+\]
+\end{itemize}
+\end{thm}
+
+In consequence,
+\[ \tilde{K}(S^n) = \begin{cases} 0 & n\text{ odd}\\
+\ZZ & n\text{ even}
+\end{cases}
+\]
+and \[ \tilde{KO}(S^n) = 
+\begin{cases} 
+\ZZ / 2 & n\equiv 1\text{mod}8\\
+\ZZ / 2 & n\equiv 2\text{mod}8\\
+0       & n\equiv 3\text{mod}8\\
+\ZZ     & n\equiv 4\text{mod}8\\
+0       & n\equiv 5\text{mod}8\\
+0       & n\equiv 6\text{mod}8\\
+0       & n\equiv 7\text{mod}8\\
+\ZZ     & n\equiv 8\text{mod}8.
+\end{cases}
+\]
+
+\begin{rem}
+$\pi_k(O) =\lim_n\pi_k(O_n)=\pi_k(O_N)$ provided that $N>>k$ and 
+$\pi_k(U) =\lim_n\pi_k(U_n)=\pi_k(U_N)$ provided that $N>>k.$
+\end{rem}
 \end{document}
