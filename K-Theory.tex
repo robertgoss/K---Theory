@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{geometry}
+\usepackage{stmaryrd}
 
 \usepackage[all,cmtip]{xy}
 \usepackage{diagxy}
@@ -26,16 +27,18 @@
 
 %Useful macros
 %Blackboard bold
-\newcommand{\NN}{\mathbb{N}} 
-\newcommand{\ZZ}{\mathbb{Z}} 
-\newcommand{\RR}{\mathbb{R}} 
-\newcommand{\CC}{\mathbb{C}} 
-\newcommand{\HH}{\mathbb{H}} 
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\QQ}{\mathbb{Q}}
 
 %Specific K-Theory macros (Michal)
 \newcommand{\KR}{\widetilde{K}}   % reduced K-theory
 \newcommand{\cp}{\CC P}   % complex projective space
 \newcommand{\CP}{\cp}     % Rupert prefers capitals...
+\newcommand{\CPi}{\cp^\infty}
 \newcommand{\smsh}{\wedge}  % shash product of spaces; "wedge" is so confusing and "smash" already exists
 \newcommand{\susp}{\Sigma}  % suspension
 \newcommand{\htpyequiv}{\simeq}  % homotopy equivalence
@@ -46,6 +49,7 @@
 
 % Operators
 \DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\ch}{ch}
 
 %Arrows
 \newcommand{\into}{\hookrightarrow}
@@ -967,5 +971,395 @@ We can calculate how the Adams operations depend on the $\Lambda^i$:
 
 \end{itemize}
 \end{exmp}
+
+%%% NOTE: Whoever is writing up the lecture from 21/2/2012: John did a
+%%%       recap of stuff from that lecture just after the proof of
+%%%       lemma "kxcpn-kunneth" below. I've not reproduced it (since
+%%%       I'm lazy), but hopefully you'll define a product in
+%%%       K-theory over U, local and global, together with the gluing
+%%%       theorem.
+\section{The Leray-Hirsch Theorem}
+TODO: Insert this into the previous lecture in a sensible manner (and
+fix the text: I've just written it to give it a label).
+\begin{thm}\label{local-to-global-product}
+  If $Y$ is compact and $f: X\to Y$ is locally a product in K-theory,
+  then $f$ is in fact globally a product in K-theory.
+\end{thm}
+
+% Lecture of 28/2/2012: Part 2 of the Leray Hirsch theorem story, I
+% think.
+\subsection{Generalised Cohomology Theories}
+
+A \emph{generalised cohomology theory} consists of the following data:
+\begin{itemize}
+\item For each $q \in \ZZ$ and (suitable: see below) pair of spaces
+  $(X,A)$, an abelian group $E^q(X,A)$. Write $E^q(X)$ for the group
+  $E^q(X, \emptyset)$.
+
+\item For every map of pairs $(X,A) \xto{f} (Y,B)$, and for each $q
+  \in \ZZ$, an induced homomorphism of abelian groups $f^*: E^q(Y,B)
+  \to E^q(X,A)$.
+
+\item A homomorphism $\Delta: E^q(A) \to E^{q+1}(X,A)$, called the
+  connecting homomorphism.
+\end{itemize}
+These data must satisfy the following axioms (the Eilenberg--Steenrod
+axioms, minus the dimension axiom):
+\begin{enumerate}
+\item If $f: (X,A) \to (X,A)$ is the identity then $f^*$ is the
+  identity on $E^q(X,A)$ for each $q$.
+
+\item Given $f: (X,A)\to (Y,B)$ and $g: (Y,B)\to (Z,C)$, the
+  composites before and after applying $E^q$ are related by $(gf)^* =
+  f^*g^*$.
+
+\item \emph{Naturality of the connecting homomorphism}. If $f:
+  (X,A)\to (Y,B)$ is a map of pairs then the following diagram
+  commutes.
+  \begin{equation*}
+    \xymatrix{
+      E^q(A) \ar[r]^-\Delta & E^{q+1}(X,A)\\
+      E^q(B) \ar[r]_-\Delta \ar[u]^{(f|_A)^*} & E^{q+1}(Y,B) \ar[u]_{f^*}
+    }
+  \end{equation*}
+  where the $\Delta$ on the top line is that for the pair $(X,A)$ and
+  the $\Delta$ on the bottom line is for the pair $(Y,B)$.
+
+\item \emph{Homotopy invariance}. Given maps $f$ and $g$ such that $f
+  \simeq g$, it follows that $f^* = g^*$.
+
+\item \emph{The exact sequence of a pair}. Given a pair of spaces
+  $(X,A)$, let $p: (X,\emptyset) \to (X,A)$ and $i: A \into X$. Then
+  the following sequence is exact.
+  \begin{equation*}
+    \dots \to E^{q-1}(A) \xto{\Delta} E^q(X,A) \xto{p^*}
+    E^q(X) \xto{i^*} E^q(A) \xto{\Delta} E^{q+1}(A) \to \dots
+  \end{equation*}
+
+\item \emph{Excision}. The natural map $(X,A) \to (X/A, *)$ (where $*$
+  denotes the image of $A$ in $X/A$) induces isomorphisms $E^q(X/A,*)
+  \to E^q(X,A)$.
+\end{enumerate}
+The last axiom, explains the data above asked for ``suitable''
+spaces. In general, one can only expect this to work when the
+inclusion $A \into X$ is a cofibration. This is true for $X$ a CW
+complex and $A$ a subcomplex. By Whitehead's theorem (which says that
+any map between spaces can be represented up to weak equivalence by a
+CW map between CW complexes), it suffices to define $E^*$ on such
+spaces and maps.
+
+A \emph{natural transformation} of cohomology theories $\phi^*: E^*
+\to F^*$ is defined to be a sequence of homomorphisms
+\begin{equation*}
+  \phi^q_{(X,A)}: E^q(X,A) \to F^q(X,A)
+\end{equation*}
+such that naturality diagrams commute for induced homomorphisms and
+also for $\Delta$.
+
+\begin{thm}[Eilenberg-Steenrod]
+  Suppose that $\phi^*: E^*\to F^*$ is a natural transformation of
+  cohomology theories and that $\phi^q_{pt}: E^q(pt)\to F^q(pt)$ is an
+  isomorphism for all $q$. Then $\phi^q_{(X,A)}: E^q(X,A)\to F^q(X,A)$
+  is an isomorphism for all pairs of spaces $(X,A)$ and integers $q$.
+\end{thm}
+
+Note that this only applies if a natural transformation $\phi$ exists
+with the given behaviour on points. For example, one can define a
+theory
+\begin{equation*}
+  E^*(X,A) = H^*(X,A)\otimes \ZZ[u,u^{-1}],
+\end{equation*}
+where $u$ has degree $2$ and $\otimes$ denotes the tensor product of
+graded abelian groups. Although $E^*$ has the same groups as $K^*$ on
+a point, the theories are not isomorphic.
+
+Here is a sketch proof of the theorem: Firstly, $E^*(S^0)\to F^*(S^0)$
+is an isomorphism (use the exact sequence of the obvious pair and the
+five lemma). Next, use the exact sequence again to show that
+\begin{equation*}
+  E^*(D^1,S^0) \to F^*(D^1,S^0)
+\end{equation*}
+is an isomorphism. By excision, conclude that $E^*(S^1)\to F^*(S^1)$
+is an isomorphism. Now do a similar trick to show by induction that
+every $E^*(S^n)\to F^*(S^n)$ is an isomorphism. Now suppose that
+$E^*(X)\to F^*(X)$ is an isomorphism. If $f: S^{k-1}\to X$ and
+$Y=X\cup_f D^k$ then use an exact sequence (the Mayer-Vietoris
+sequence, in fact) to show that $\phi*$ is an isomorphism for
+$Y$. Finally, every CW complex can be built inductively by attaching
+cells to $S^0$ in this fashion.
+
+An application of this theorem is the following lemma
+\begin{lem}\label{kxcpn-kunneth}
+  The product map $K^*(X)\otimes K^*(\CP^n) \to K^*(X\times \CP^n)$ is
+  an isomorphism.
+\end{lem}
+\begin{proof}
+  Firstly, define a cohomology theory by $E_1^*(X,A) = K^*(X,A)\otimes
+  K^*(\CP^n)$. When checking the axioms, it's important that
+  $K^*(\CP^n)$ is torsion-free, so tensoring with it preserves the
+  exact sequence of a pair from $K^*(X,A)$. Note that this also shows
+  what the connecting homomorphism must be: $\Delta_K\otimes 1$.
+
+  Next (much easier), $E_2^*(X,A) = K^*(X\times \CP^n, A\times \CP^n)$
+  also defines a cohomology theory. The product map is then a natural
+  transformation of cohomology theories $E_1^*\to E_2^*$ and is
+  clearly an isomorphism when $X$ is a point.
+\end{proof}
+
+Now it is possible to prove the Leray-Hirsch theorem in K-theory:
+\begin{thm}[Leray-Hirsch]
+  \label{leray-hirsch}
+  Let $E$ be a (complex) vector bundle over a compact space $X$ and
+  $P(E)$ be its projective bundle. Write $K$ for the tautological
+  bundle over $P$ and define $x = [K] - 1 \in K^*(P(E))$. Then
+  $K^*(P(E))$ is a free module over $K^*(X)$ with basis $1,x,x^2,\dots
+  x^{n-1}$ where $n$ is the dimension of $E$.
+\end{thm}
+\begin{proof}
+  Notice that the projection $\pi: P(E)\to X$ induces a ring
+  homomorphism
+  \begin{equation*}
+    \pi^*: K^*(X)\to K^*(P(E)).
+  \end{equation*}
+  As normal, this gives $K^*(P(E))$ the structure of a $K^*(X)$
+  module. The conclusion can be restated as ``$\pi$ is globally a
+  product in K-theory'' (and this is the way to prove it). By Theorem
+  \ref{local-to-global-product}, it suffices to show that $\pi$ is
+  locally a product in K-theory. Now, given $x\in X$, choose a
+  neighbourhood $U$ of $x$ such that
+  \begin{equation*}
+    E|_U \cong U \times \CC^n.
+  \end{equation*}
+  Then the projective bundle is simply
+  \begin{equation*}
+    P(E)|_U \cong U \times \CP^{n-1}.
+  \end{equation*}
+  Now apply the K\"unneth formula from Lemma \ref{kxcpn-kunneth},
+  which shows that $\pi$ is a product in K-theory over $U$.
+\end{proof}
+Note that this argument only really needs the K\"unneth formula to
+work. In particular, this theorem is definitely also true for ordinary
+cohomology, $H^*$, as well.
+
+\subsection{The Splitting Principle in K-theory}
+
+\begin{thm}[Splitting Principle]
+  Let $E$ be a (complex) vector bundle over $X$. Then there exists a
+  space $F$ together with a map $f: F\to X$ such that
+  \begin{enumerate}
+  \item The induced map $f^*: K(X) \to K(F)$ is injective.
+  \item The pullback bundle, $f^*(E)$, is isomorphic to a sum of line
+    bundles.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  (A sketch.) Start with $F_1 = P(E)$ and $\pi_1: P(E)\to X$. By the
+  Leray-Hirsch theorem, $\pi_1^*$ includes $K^*(X)$ as the
+  $K^*(X)\cdot 1$ summand. In particular, it is injective. But the
+  tautological bundle $K$ is a sub-bundle of $\pi_1^*(E)$, so
+  $\pi_1^*(E) \cong K\oplus E'$ where $E'$ has dimension one less than
+  that of $E$. This is the inductive step.
+\end{proof}
+
+\section{The Chern Character}
+
+The objective of this section is to construct a natural transformation
+of cohomology theories
+\begin{equation*}
+  \ch: K^*(X)\otimes \QQ \to H^*(X; \QQ)
+\end{equation*}
+called the \emph{Chern character}. To be precise, collect up even and
+odd terms of the rational cohomology ring as
+\begin{align*}
+  H^{ev}(X; \QQ) &= \prod_n H^{2n}(X; \QQ)\\
+  H^{odd}(X; \QQ) &= \prod_n H^{2n}(X; \QQ)
+\end{align*}
+(This really is a product, rather than a direct sum. If $X$ has the
+homotopy type of a finite dimensional CW complex, the product is
+finite, so isomorphic to a direct sum, but this is not true for
+general spaces). The natural transformation $\ch$ will map
+\begin{align*}
+  K^0(X)\otimes \QQ &\to H^{ev}(X; \QQ)\\
+  K^1(X)\otimes \QQ &\to H^{odd}(X; \QQ)
+\end{align*}
+
+First, however, is a quick diversion to the theory of characteristic
+classes. Start with the set of line bundles on a space $X$. So far, it
+has had several names:
+\begin{equation*}
+  \mathcal{L}(X) = \Vect_1(X) = [X, G_1(\CC^\infty)] = [X, \CPi]
+\end{equation*}
+and the last definition is the one that we need for now.
+
+The cohomology of $\CPi$ is given by $H^*(\CPi; \ZZ) = \ZZ[u]$, where
+$u\in H^2(\CPi;\ZZ)$. Given a line bundle $L$ over $X$, write $\phi_L:
+X\to \CPi$ for its classifying map (defined up to homotopy). The
+\emph{first Chern class}, $c_1(L)$ is defined by
+\begin{equation}\label{eq:first-chern-class}
+  c_1(L) = \phi_L^*(u) \in H^2(X; \ZZ).
+\end{equation}
+The first Chern class has the following properties:
+\begin{enumerate}
+\item $c_1(f^*L) = f^*c_1(L)$ (because $\phi_{f^*L} \simeq \phi_L
+  \circ f$)
+
+\item If $L \cong L'$ then $c_1L = c_1L'$ (because the classifying
+  maps of the line bundles are homotopic, so $H^*$ takes the same
+  value on both).
+\end{enumerate}
+The tensor product of line bundles, $\otimes$, makes the set of line
+bundles on $X$ a group. The unit is the trivial line bundle $\epsilon
+= X\times \CC$ and the inverse of a bundle $L$ is the dual bundle,
+$L^*$.
+
+\begin{thm}
+  $c_1: \mathcal{L}(X) \to H^2(X;\ZZ)$ is an isomorphism of groups.
+\end{thm}
+\begin{proof}
+  Here, we shall prove that $c_1$ defines a homomorphism. See previous
+  TCC course or a textbook.
+  %% TODO:
+  %%   Which one? Neither Milnor and Stasheff nor Atiyah
+  %%   (K-Theory) seem to prove this(!)
+  Starting with $K$ the tautological bundle, consider $K \boxtimes K$,
+  the external tensor product of $K$ with itself. The classifying map
+  of $K\boxtimes K$ defines a map (up to homotopy)
+  \begin{equation*}
+    \mu: \CPi\times\CPi \to \CPi.
+  \end{equation*}
+  By the K\"unneth formula (in ordinary cohomology),
+  \begin{equation*}
+    H^2(\CPi\times \CPi) = H^2(\CPi)\otimes H^0(\CPi) \oplus
+    H^0(\CPi)\otimes H^1(\CPi),
+  \end{equation*}
+  which has a basis $u\otimes 1$, $1 \otimes u$. It is a fact (which
+  we shall not prove) that
+  \begin{equation*}
+    \mu^*(u) = u\otimes 1 + 1 \otimes u.
+  \end{equation*}
+  As such, if $L$ and $L'$ are line bundles then the classifying
+  map of $L\otimes L'$ is
+  \begin{equation*}
+    X \xto{\Delta} X\times X \xto{\phi_{L}\times \phi_{L'}}
+    \CPi\times \CPi \xto{\mu} \CPi
+  \end{equation*}
+  and, in cohomology,
+  \begin{equation*}
+    c_1(L) + c_1(L') \mapsfrom
+    c_1(L)\otimes 1 + 1 \otimes c_1(L') \mapsfrom
+    u\otimes 1 + 1 \otimes u \mapsfrom u
+  \end{equation*}
+\end{proof}
+
+As per the remark after the Leray-Hirsch theorem (Theorem
+\ref{leray-hirsch}), there is also a version of this theorem in
+ordinary cohomology:
+\begin{thm}
+  If $E \to X$ is a complex vector bundle, $P(E)$ denotes the
+  projective bundle of $E$, and $K$ denotes the tautological bundle
+  over $P(E)$, with $x = c_1(K)\in H^2(P(E);\ZZ)$ then $H^*(P(E);\ZZ)$
+  is free over $H^*(X)$ with basis $1,x,x^2,\dots ,x^{n-1}$ where $n$
+  is the dimension of $E$.
+\end{thm}
+
+This theorem allows us to define Chern classes in each dimension up to
+that of $E$. Define
+\begin{equation*}
+  c_k(E) \in H^{2k}(X; \ZZ)
+\end{equation*}
+by the equation
+\begin{equation}\label{all-chern-classes}
+  x^n + c_1x^{n-1} + \dots + c_{n-1}x + c_n = 0
+\end{equation}
+where $c_1$ denotes the Chern class of $E$, which we have already
+defined, and each other $c_k$ is then uniquely defined by the
+equation. These Chern classes have the following properties:
+\begin{enumerate}
+\item $c_0(E) = 1 \in H^0(X;\ZZ)$
+
+\item \emph{Naturality with respect to pullbacks}. $c_if^*(E) =
+  f^*c_i(E)$.
+
+\item If $E\cong F$ then $c_iE = c_iF$
+
+\item \emph{The Whitney sum formula}.
+  \begin{equation}\label{whitney-sum-formula}
+    C_k(E\oplus F) = \sum_{i+j=k} c_i(E)c_j(F)
+  \end{equation}
+
+\item \emph{Normalisation}. $c_1(K) = u\in H^2(\CPi)$
+\end{enumerate}
+Note that the last property was actually taken as the definition of
+$c_1(K)$ above, but is included because that, together with
+\eqref{all-chern-classes} actually determines $c_k(E)$ for all vector
+bundles $E$.
+
+Define the \emph{total Chern class} of a complex vector bundle $E \to
+X$ to be the formal sum given by
+\begin{equation}
+  \label{total-chern-class}
+  C(E) = 1 + c_1(E) + c_2(E) + \dots \in H^{ev}(X; \ZZ)
+\end{equation}
+Expanding out the product and using the Whitney sum formula (equation
+\eqref{whitney-sum-formula}) gives
+\begin{equation*}
+  C(E \oplus F) = C(E)C(F).
+\end{equation*}
+Sometimes this is phrased as ``$C$ is exponential''.
+
+By the splitting principle, one only needs to calculate characteristic
+classes on sums of line bundles. Write $E = L_1\oplus \dots \oplus
+L_k$ where each $L_i$ is a line bundle. Then
+\begin{equation*}
+  C(E) = (1+x_1)(1+x_2)\dots (1+x_k)
+\end{equation*}
+by the Whitney sum formula. The Chern class $c_i(E)$ is given by the
+symmetric polynomial $\sigma_i(x_1,\dots ,x_k)$.
+
+The Whitney sum formula gives a way to calculate the total Chern class
+of a sum of bundles. But how about a tensor product? This is rather
+more complicated. As before, write two bundles as a sum of line
+bundles:
+\begin{equation*}
+  E = K_1 \oplus \dots \oplus K_n \qquad
+  F = L_1 \oplus \dots \oplus L_m
+\end{equation*}
+and write $x_i = c_1(K_i)$, $y_j = c_1(L_j)$. Since $\otimes$
+distributes over $\oplus$,
+\begin{equation*}
+  E \otimes F = \sum_{i,j} K_i \otimes L_j
+\end{equation*}
+so
+\begin{equation*}
+  C(E\otimes F) = \prod_{i,j}(1+x_i+y_j),
+\end{equation*}
+where the terms in the product look like this because $c_1(K_i\otimes
+L_j) = c_1(K_i)+c_1(L_j)$.
+
+Now think of $C(E\otimes F)$ as an element of
+$\ZZ[x_1,\dots,x_n][y_1,\dots,y_m]$ and note that the coefficients
+of the monomials in $y_*$ are symmetric in the $x_i$'s. As such,
+\begin{equation*}
+  C(E\otimes F) \in \ZZ[\sigma_1,\dots,\sigma_n][y_1,\dots,y_m]
+\end{equation*}
+where $\sigma_i = \sigma_i(x_1,\dots,x_n)$. Of course, rearranging to
+think of this as a sum of monomials in the $\sigma_i$'s, the
+coefficients are symmetric functions of the $y_j$'s, so
+\begin{equation*}
+  C(E\otimes F) \in \ZZ[\sigma_1,\dots,\sigma_n][\tau_1,\dots,\tau_m]
+\end{equation*}
+where $\tau_j = \sigma_j(y_1,\dots,y_m)$. This does give $c_k(E\times
+F)$ as a polynomial in $c_i(E)$ and $c_j(F)$, but it's pretty
+complicated. This leads to a natural \textbf{Question:} Is there a
+sequence of characteristic classes in $H^{ev}(X)$, that can be written
+\begin{equation*}
+  \ch(E) = \ch_0(E) + \ch_1(E) + \dots
+\end{equation*}
+such that the following identities hold for all $E, F$?
+\begin{align*}
+  \ch(E\oplus F) &= \ch(E) + \ch(F)\\
+  \ch(E\otimes F) &= \ch(E)\ch(F)
+\end{align*}
+% End lecture from 28/2/2012
 
 \end{document}
