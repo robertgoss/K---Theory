@@ -46,6 +46,7 @@
 \DeclareMathOperator{\Vect}{Vect}
 \renewcommand{\epsilon}{\varepsilon}
 \newcommand{\eps}{\epsilon}
+\newcommand{\proj}{\mathrm{Proj}}
 
 % Operators
 \DeclareMathOperator{\Ker}{Ker}
@@ -1574,5 +1575,103 @@ such that the following identities hold for all $E, F$?
 % End lecture from 28/2/2012
 
 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Last lecture, Algebraic K-Theory, scribe: Michal
+\section{An extremely brief intro to algebraic K-Theory}
+All of this section (and more) can be found in Milnor's ``Introduction to algebraic K-Theory''.
+
+\subsection{The $0$-th $K$-group $K_0(R)$ of a ring}
+
+Let $E\to X$ be a complex vector bundle over a base space $X$ and denote by $\Gamma(E)$ its space of sections:
+$$\Gamma(E)=\{s:X\to E~:~s(x)\in E_x\ \text{for all $x\in X$}\}.$$
+Since each fibre $E_x$ is a vector space sections can be added and multiplied by functions $f:X\to\CC$. That makes $\Gamma(E)$ into a module over the ring $C(X)$ of continuous, complex-valued functions on $X$.
+
+\begin{thm}
+(Swan) Let $X$ be compact Hausdorff. There is a 1-1 correspondence between 
+\begin{itemize}
+\item isomorphism classes of vector bundles over $X$, and
+\item isomorphism classes of finitely generated projective modules over $C(X)$.
+\end{itemize}
+\end{thm}
+
+Recall that a module $M$ over a ring $R$ is \emph{projective} if it is a direct summand of a free $R$-module. We wil denote the set of isomorphism classes of finitely generated projective $R$-modules by $\proj(R)$. It is equipped with a direct sum $\oplus$ of modules, which makes it into a commutative monoid and we define $K_0(R)$ as the universal groupification of $\proj(R)$.
+
+\begin{exmp}
+We have $\proj(\ZZ)=\NN$, because a projective $\ZZ$-module is free, hence determined by its rank. That gives $K_0(\ZZ)=\ZZ$. By the same argument $K_0(F)=\ZZ$ for any field $F$. For any ring $R$ we have $K_0(M_{n\times n}(R))=K_0(R)$, which is a manifestation of Morita equivalence.
+\end{exmp}
+
+Next we define a class of rings of number-theoretic origin for which one wants to compute algebraic $K$-Theory.
+
+\begin{defn}
+A \emph{Dedekind domain} (Dd) is a commutative integral domain $R$ such that if $I,J$ are any two ideals with $I\subseteq J$ then there is an ideal $K$ for which $I=JK$.
+\end{defn}
+
+Note that $R$ has no zero divisors, hence for any $i,j\in R$, $j\neq 0$, a solution to $i=jk$, if exists, must be unique. The same is true for ideals.
+
+\begin{lem}
+For $J\neq 0$ the ideal $K$ from the definition of a Dedekind domain is unique.
+\end{lem}
+\begin{proof}
+Suppose $JK=JK'=I$. Choose any $x\in J$ and let $L$ be any ideal for which $xR=LJ$ (it exists since $xR\subseteq J$). Next we have
+$$xK=xRK=LJK=LI=LJK'=xRK'=xK'.$$
+Therefore for any $k\in K$ there is a $k'\in K'$ with $xk=xk'$, which implies $k'=k$ and $k\in K'$. This proves $K'=K$.
+\end{proof}
+
+\begin{exmp}
+The main class of examples of Dd's are the rings of integers in a number field. Let $E\supseteq\QQ$ be a finite extension of $\QQ$. Denote by $\Lambda(E)$ the set of integers in $E$, i.e. elements $x\in E$ which satisfy a polynomial equation with integer coefficients and with leading coefficient $1$. Then $\Lambda(E)$ is a Dedekind domain. The specific examples are Gaussian integers $\ZZ[i]$ or other cyclotomic extensions $\ZZ[\omega_p]$ for a primitive $p$-th root of unity, $p$ prime.
+\end{exmp}
+\begin{defn}
+(Ideal class group) We say two ideals $I,J\subseteq R$ belong to the same class if there exist $x,y\in R$ such that
+$$xI=yJ.$$
+By $C(R)$ we denote the group of all ideal classes.
+\end{defn}
+
+Note that $C(R)$ is indeed a group with product $(I,J)\to IJ$ (check independence of the representatives of a class), unit the class of $R$ and inverse given by choosing any $x\in I$ and solving the ideal-equation $xR=IK$ with unknown $K$.
+
+\begin{exmp}
+Every two principal ideals are in the same class. It follows that $C(\ZZ)=\{e\}$ and in general $C(R)$ is trivial if $R$ is a P.I.D.
+\end{exmp}
+
+\begin{thm}
+For a Dedekind domain $R$ we have
+$$K_0(R)=\ZZ\oplus C(R).$$
+\end{thm}
+\begin{proof}
+The proof follows from the next three claims
+\begin{itemize}
+\item[a)] Every ideal $I$ in a Dd is fintely generated and projective as an $R$-module.
+\item[b)] Every finitely generated projective module over $R$ is isomorphic to $I_1\oplus\cdots\oplus I_k$ for ideals $I_1,\ldots,I_k\subseteq R$
+\item[c)] (Steinitz Theorem) If $I_1\oplus\cdots\oplus I_k=J_1\oplus\cdots\oplus J_l$ are isomorphic as $R$-modules then $k=l$ and $I_1\cdot\ldots\cdot I_k=J_1\cdot\ldots\cdot J_l$.
+\end{itemize}
+We will only prove a). Choose any $x\in I$ and find $J$ such that $IJ=xR$. That means we can write 
+$$x=\sum_{i=1}^k u_iw_i$$
+for $u_i\in I$, $w_i\in J$.
+Define maps
+\begin{align*}
+f:I\to R^k &\quad t\mapsto (tv_1/x,\ldots,tv_k/x)\\
+g:R^k\to I &\quad (r_1,\ldots,r_k)\mapsto \sum u_ir_i
+\end{align*}
+The map $f$ is well-defined because $tv_i\in IJ=xR$. We easily see $gf=\textrm{id}_I$, so $g$ is a split surjection and that ends the proof.
+Part b) is proved using a similar technique (split off one ideal from $P$ at a time).
+\end{proof}
+
+\subsection{Higher algebraic $K$-theory}
+As always we write $Gl_n(R)$ for the group of invertible $n\times n$ matrices with entries in $R$ and 
+$$Gl(R)=\bigcup_{n} Gl_n(R)$$
+is the limit under the usual stabilization map $Gl_n(R)\to Gl_{n+1}(R)$ which puts a $1$ in the entry $(n+1,n+1)$.
+
+\begin{defn}
+The higher algebraic $K$-groups are defined as
+\begin{itemize}
+\item $$K_1(R)=Gl(R)\big/[Gl(R),Gl(R)]$$
+\item In general, for $i\geq 1$ we define
+$$K_i(R)=\pi_i(BGl(R)^+)$$
+where $BGl(R)$ is the classifying space of $Gl(R)$ and $X^+$ is Quillen's plus construction: the universal gadget which abelianizes the fundamental group of $X$ while preserving all of homology.
+\end{itemize}
+\end{defn}
+
+For example it is known tkat $K_1(\ZZ)=K_2(\ZZ)=\ZZ/2$ and $K_3(\ZZ)=\ZZ/48$. 
 
 \end{document}
