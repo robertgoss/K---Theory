@@ -23,7 +23,7 @@
 \newtheorem{exmp}{Example}
 \newtheorem{exer}{Exercise}
 \theoremstyle{remark}
-\newtheorem{rem}{Remark}
+\newtheorem{rem}{Remark}		
 
 %Useful macros
 %Blackboard bold
@@ -1617,9 +1617,190 @@ such that the following identities hold for all $E, F$?
 \end{align*}
 % End lecture from 28/2/2012
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%7th lecture.
 
+The answer is affirmative over $\QQ$. For every vector bundle $E$ over $X$ we want to define $\ch(E)$ %as 
+%\[
+%ch(E) = ch_0(E) + ch_1(E) + \cdots
+%\] 
+satisfying the following properties
+\begin{enumerate}
+\item $\ch(f^*(E))=f^*(\ch(E))$
+\item $\ch(E\oplus F) =  \ch(E) + \ch(F)$
+\item $\ch(E\otimes F) = \ch(E)\ch(F)$
+\item for a line bundle $L$, we have $\ch(L) = e^x = 1+x+\frac{x^2}{2!}+\cdots$ where $x\in c_1(L)\in H^2(X;\QQ).$
+\end{enumerate}
 
+For a set of formal indeterminates $x_1,\ldots, x_n$ we can define $s_l(\sigma_1,\ldots,\sigma_n):= x_1^l + \ldots +x_n^l$ where the $\sigma_i$'s are the elementary symmetric functions in the $x_i$'s and $s_l$ is called the $l$-th Newton polynomial.
 
+Let $E$ be a vector bundle over $X$ of dimension $k$. Set $\ch_l(E)=\frac{1}{l!}s_l(c_1,\ldots,c_k)$. It's easy to see that $\ch(E) = \ch_0(E) + \ch_1(E) + \cdots$ satisfies all the above properties, using the splitting principle to prove some of them.
+
+\begin{thm}
+If $X$ is a finite CW-complex then $\ch:K^*(X)\otimes \QQ \to H^*(X;\QQ)$ is an isomorphism.
+\end{thm}
+
+\begin{proof}
+By definition $K^{-n}(X,A) = \tilde{K}^0(\Sigma^n(X/A))$. Notice that a map of pairs $f:(X,A)\to (Y,B)$ induces a map $\tilde{f}:X/A\to Y/B$. Therefore $\ch$ extends to a natural transformation $K^*(X,A)\otimes\QQ\to H^*((X,A);\QQ)$.
+
+The connecting homomorphism is defined using the maps
+\[
+\Sigma A \xot{\cong} \frac{X\cup CA}{C} \longleftarrow X\cup CA \xto{\cong} X/A
+\]
+and therefore $\ch$ commutes with the connecting homomorphism. Note that tensoring with $\QQ$ preserves exactness. So $\ch$ is a map of cohomology theories and isomorphism when $X$ is a point. Then $\ch$ is an isomorphism.
+\end{proof}
+
+\subsection{Computations.}
+
+We would like to compute $\ch:\tilde{K}^*(S^{2n})\otimes \QQ\to H^*(S^{2n};\QQ)$. Clearly $\ch:\tilde{K}^1(S^{2n})\otimes \QQ\to H^{odd}(S^{2n};\QQ)$ is zero. Now we will prove that $\ch:\tilde{K}^0(S^{2n})\to H^{ev}(S^{2n};\QQ)$ factors as 
+\[\begin{array}{rcl}
+\tilde{K}^0(S^{2n})&\to& H^{2n}(S^{2n},\ZZ)\\
+				   &\to& H^{2n}(S^{2n},\QQ).\\
+\end{array}
+\]
+We will first treat the case of $n=1$:\\ 
+\[
+\tilde{K}^0(S^2) = \pi_2(BU)=\pi_1U =\ZZ.
+\]
+If $E$ and $F$ are vector bundles over $S^2$ and $c_1(E) = c_1(F)$, i.e. $\ch(E) = \ch(F)$; then $E\cong F$. Thus $\tilde{K}^0(S^2)\cong H^2(S^2;\ZZ)$ This concludes the computation for $S^2$.
+For $S^4$ we have the commutative diagram
+
+\begin{displaymath}
+    \xymatrix{
+        \tilde{K}^0(S^2)\otimes \tilde{K}^0(S^2) \ar[r] \ar[d]^{\cong} & \tilde{K}^0(S^2\wedge S^2) \ar[d] \\
+        H^2(S^2;\ZZ)\otimes H^2(S^2;\ZZ) \ar[r]^{\cong} \ar[d]      & H^4(S^2\wedge S^2;\ZZ) \ar[d] \\
+		H^2(S^2;\QQ)\otimes H^2(S^2;\QQ) \ar[r]    & H^4(S^2\wedge S^2;\QQ)
+        }
+\end{displaymath}
+
+Therefore the map $\ch:K^0(S^{4})\to H^{ev}(S^4;\QQ)$ factors as 
+\[\begin{array}{rcl}
+\tilde{K}^0(S^{4})&\to& H^{4}(S^{4};\ZZ)\\
+				   &\to& H^{4}(S^{4};\QQ).\\
+\end{array}
+\] Continuing this way the calculation can be completed by induction.
+
+This leads to the following application.
+\begin{thm}
+Suppose $u\in H^{2n}(S^{2n};\ZZ)\cong\ZZ$ then there is a vector bundle $E$ over $S^{2n}$ with $c_nE = u$ if and only if $u$ is divisible by $(n-1)!$
+\end{thm}
+
+\begin{lem}
+$s_n = \sigma_1 s_{n-1}-\sigma_2s_{n-2}+\cdots+(-1)^{n-2}\sigma_{n-1}s_1+(-1)^{n-1}n\sigma_n$
+\end{lem}
+
+\begin{proof}
+For formal variables $x_1,\ldots, x_n$ we have
+\[
+(t+x_1)(t+x_2)\cdots(t+x_n) = t^n + \sigma_1t^{n-1} + \cdots + \sigma_n.
+\]
+Setting $t=-x_i$ we see that
+\[
+x_i^n = \sigma_1 x_i^{n-1}-\cdots+(-1)^{n+1}\sigma_n
+\]
+and if we sum over $i$ we get the result.
+\end{proof}
+
+Now we can prove the theorem.
+\begin{proof}
+Let $E$ be a vector bunle over $S^{2n}$. Then $c_1(E)=\cdots=c_{n-1}(E)=0$ and so
+\[
+\ch_n(E) = \frac{1}{n!}s_n(c_1,\ldots,c_n) = \pm \frac{nc_n}{n!} \in \ZZ
+\] implies that $c_n(E)$ is divisible by $(n-1)!$
+\end{proof}
+
+Our second computation will be the map $\ch:K^*(\cp^n)\otimes \QQ\to H^{ev}(\cp^n;\QQ)$. Recall that $K^0(\cp^n)= \frac{\ZZ[x]}{(x-1)^{n+1}}$ for $x= K-1$. Choose $u\in H^2(\cp^n;\ZZ)$ such that $c_1(K)=u$, then $\ch (K)=e^u$. Using the properties of $\ch$ we easily see that $\ch(x-1)=e^u-1$ and therefore
+\[
+\ch((1-x)^k)=(e^u-1)^k = u^k + \text{ higher terms}
+\].
+
+We would also like to check that $\ch(\Psi^k(x)) = k^l \ch(x)$. It is sufficient to check this for a sum of line bundles $x=L_1\oplus\cdots\oplus L_n$. We have that $\Psi^k(x) = L_1^k+\cdots L_n^k$, then
+\[\begin{array}{rcl}
+\ch(\Psi^k(x)) &=& \ch(L_1)^k+\cdots \ch(L_n)^k\\
+			   &=& e^{kx_1} + \cdots + e^{kx_n}\\
+			   &=& n + k(x_1+\ldots+x_n)+\frac{k^2}{2!}(x_1^2+\ldots+x_n^2) + \ldots
+\end{array}
+\] where $x_i = c_1(L_i)$.
+
+\begin{exer}
+Compute $\ch(\Lambda^i(E))$, $\ch(S^i E)$.
+\end{exer}
+
+\section{About the proof of the Bott's periodicity theorem.}
+We would like to prove that $\tilde{K}^0(S^2)\otimes \tilde{K}^0(X)\to \tilde{K}^0(S^2\wedge X)$  is an isomorphism for $X$ is a finite CW complex.
+\begin{proof}
+Let $\beta:\tilde{K}^0(X)\to \tilde{K}^0(S^2\wedge X)$ the Bott's map. Suppose that $\beta$ is surjective for all $X$. Then $\beta$ is an isomorphism for all $X$ because $\beta$ is a natural transformation of cohomology theories which is an isomorphism when $X$ is a point. Thus we will prove the surjectivity of $\beta$.
+
+STEP 1. Consider the case $X =  S^n.$
+
+We know that $\tilde{K}^0(S^1) = 0$ and therefore $\beta:\tilde{K}^0(S^1)\to \tilde{K}^0(S^3)$ is surjective and zero. Hence $\tilde{K}^0(S^3) = 0$ and by induction we see that $\tilde{K}^0(S^{2n+1}) = 0$.
+For $X= S^2$, recall $\tilde{K}^0(S^2) = \ZZ$, we have the commutative diagram
+\begin{displaymath}
+    \xymatrix{
+        \tilde{K}^0(S^2) \ar[r]^\beta \ar[d]^{\cong} & \tilde{K}^0(S^2\wedge S^2) \ar[d]^{\cong} \\
+        H^2(S^2;\ZZ) \ar[r]^{\cong} \ar[d]      & H^4(S^2\wedge S^2;\ZZ) \ar[d] \\
+		H^2(S^2;\QQ) \ar[r]    & H^4(S^2\wedge S^2;\QQ)
+        }
+\end{displaymath}
+which shows that $\beta$ is surjective and also injective. Thus an isomrophism. Following the same lines, we see that $\tilde{K}^0(S^{2n})\to \tilde{K}^0(S^2\wedge S^{2n})$ is an isomorphism.
+
+STEP 2. Reduction to the case $X = S^n$
+For a pair of spaces $(X,A)$ the map
+\[
+\Sigma A \leftarrow \frac{X\cup CA}{X} \leftarrow X\cup CA 
+\] gives a long exact sequence sequence
+\[
+\tilde{K}^0(A) \leftarrow \tilde{K}^0(X) \leftarrow \tilde{K}^0(X\cup CA) \leftarrow \tilde{K}^0(\Sigma A) \leftarrow \tilde{K}^0(\Sigma X) \leftarrow \cdots
+\]
+Combining this sequence with Bott maps we get
+\begin{displaymath}
+    \xymatrix{
+        \tilde{K}^0(A) \ar[d]^{\beta} & \tilde{K}^0(X) \ar[l] \ar[d]^{\beta} & \tilde{K}^0(X\cup CA) \ar[l] \ar[d]^{\beta} & \tilde{K}^0(\Sigma A) \ar[l] \ar[d]^{\beta} &\ar[l]\cdots\\
+        \tilde{K}^0(S^2A)  & \tilde{K}^0(S^2X) \ar[l]& \tilde{K}^0(S^2(X\cup CA)) \ar[l] & \tilde{K}^0(S^3 A) \ar[l] &\ar[l]\cdots
+        }
+\end{displaymath}
+
+For the case when $A=S^{2n+1}$, $Y=X\cup CA = X\cup_{f} D^{2n+2}$. The previous diagram takes the form
+\begin{displaymath}
+    \xymatrix{
+        0 \ar[d]^{\beta} & \tilde{K}^0(X) \ar[l] \ar[d]^{\beta} & \tilde{K}^0(Y) \ar[l] \ar[d]^{\beta} & \ZZ \ar[l] \ar[d]^{\beta} &\ar[l]\cdots\\
+        0 & \tilde{K}^0(S^2X) \ar[l]& \tilde{K}^0(S^2 Y) \ar[l] & \ZZ \ar[l] &\ar[l]\cdots
+        }
+\end{displaymath}
+Assume $\tilde{K}^0(X)\to \tilde{K}^0(S^2X)$ is an isomorphism. Diagram chasing tells us that $\tilde{K}^0 (Y)\to \tilde{K}^0(S^2Y)$ is injective and therefore an isomorphism.
+
+When $A=S^{2n}$, $Y=X\cup CA = X\cup_{f} D^{2n+1}$ we have the diagram
+\begin{displaymath}
+    \xymatrix{
+        \ZZ  \ar[d]^{\cong} & \tilde{K}^0(X) \ar[l] \ar[d]^{\beta} & \tilde{K}^0(Y) \ar[l] \ar[d]^{\beta} & 0 \ar[l] \ar[d]^{\beta} &\ar[l]\cdots\\
+        \ZZ & \tilde{K}^0(S^2X) \ar[l]& \tilde{K}^0(S^2Y) \ar[l] & 0 \ar[l] &\ar[l]\cdots
+        }
+\end{displaymath}
+If $\tilde{K}^0(X)\to \tilde{K}^0(S^2X)$ is an isomorphism then $\tilde{K}^0(Y)\to \tilde{K}^0(S^2Y)$ is an injection by diagram chasing.
+
+The proof of this theorem is concluded using the following result
+\begin{prop}
+Suppose X is a compact space and $F$ is a vector bundle over $X\times S^2$ then there exist vector bundels $E_1, E_2, E_3$ such that
+\[
+F\oplus(E_3\boxtimes K^{m_3})\cong (E_1\boxtimes K^{m_1})\oplus(E_2\boxtimes K^{m_2})
+\] where $K$ is the tautological line bundle over $S^2$.
+\end{prop}
+Recall that $\tilde{K}^0(S^2) =\ZZ\oplus\ZZ= <1,K-1>$.
+If $u\in H^2(S^2)$ then $u^2 = 0$ and
+\[
+\ch(K\otimes K) = \ch K\ch K = (1+u)^2= 1+2u = ch(2K-1).
+\] Thus $K^2 = 2K -1$. Similarly we get that $K^m =(1+(K-1))^m = 1+m(K-1).$
+Using the proposition, for $F\in \tilde{K}^0(X\times S^2)$ we have \[
+F\oplus(E_3\boxtimes K^{m_3})\cong (E_1\boxtimes K^{m_1})\oplus(E_2\boxtimes K^{m_2}).
+\] And this implies that
+\[\begin{array}{rcl}
+F&=&(E_1+E_2-E_3)\boxtimes 1 + (m_1E_1+m_2E_2-m_3E_3)\boxtimes(K-1)\\
+ &=& v\boxtimes 1+ w\boxtimes (K-1)
+\end{array}
+\]
+But $v\boxtimes 1 = 0$ in reduced K-theory. Thus the Bott map is surjective.
+\end{proof}
+%End of 7th lecture
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Last lecture, Algebraic K-Theory, scribe: Michal
 \section{An extremely brief intro to algebraic K-Theory}
